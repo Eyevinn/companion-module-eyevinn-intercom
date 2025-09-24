@@ -48,13 +48,25 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		this.wss = new WebSocketServer({ host, port })
 
 		this.wss.on('connection', (ws) => {
+			if (this.clients.size > 0) {
+				this.log('warn', 'Rejected WebSocket connection: only one browser client allowed')
+				ws.send(
+					JSON.stringify({
+						type: 'error',
+						message: 'Only one browser can be connected to the companion at a time. Please disconnect the other browser session before connecting.',
+						statusCode: 409
+					})
+				)
+				ws.close()
+				return
+			}
 			this.clients.add(ws)
 			this.setVariableValues({ [Variables.IS_CONNECTED]: true })
 			this.checkFeedbacks(
 				Feedbacks.GET_INPUT_MUTE_BUTTON_STATUS,
 				Feedbacks.GET_OUTPUT_MUTE_BUTTON_STATUS,
 				Feedbacks.GET_BUTTON_CHANNEL_NAME,
-				Feedbacks.IS_BUTTON_DISABLED,
+				Feedbacks.IS_BUTTON_DISABLED
 			)
 			this.log('info', 'WebSocket client connected')
 
@@ -65,12 +77,11 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 					Feedbacks.GET_INPUT_MUTE_BUTTON_STATUS,
 					Feedbacks.GET_OUTPUT_MUTE_BUTTON_STATUS,
 					Feedbacks.GET_BUTTON_CHANNEL_NAME,
-					Feedbacks.IS_BUTTON_DISABLED,
+					Feedbacks.IS_BUTTON_DISABLED
 				)
 			})
 
 			ws.on('message', (msg: WebSocket.RawData) => {
-				// eslint-disable-next-line @typescript-eslint/no-base-to-string
 				handleMessage(this, JSON.parse(msg.toString()))
 			})
 		})
