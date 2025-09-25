@@ -58,7 +58,6 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 					})
 				)
 				ws.close()
-				return
 			}
 			this.clients.add(ws)
 			this.setVariableValues({ [Variables.IS_CONNECTED]: true })
