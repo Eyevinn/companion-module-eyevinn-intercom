@@ -13,6 +13,8 @@ export enum ChannelXVariables {
 	CHANNEL_X_INPUT_MUTE = 'ChannelXInputMute',
 	CHANNEL_X_OUTPUT_MUTE = 'ChannelXOutputMute',
 	CHANNEL_X_NAME = 'ChannelXName',
+	CHANNEL_X_IS_SOMEONE_SPEAKING = 'ChannelXIsSomeoneSpeaking',
+	CHANNEL_X_SPEAKING_PULSE = 'ChannelXSpeakingPulse',
 }
 
 export const Variables = { ...GlobalVariables, ...ChannelXVariables }
@@ -52,6 +54,12 @@ export const getDefaultVariables = (): { definitions: VariableDefinition[]; valu
 					variableValue = true
 					break
 				case ChannelXVariables.CHANNEL_X_OUTPUT_MUTE:
+					variableValue = false
+					break
+				case ChannelXVariables.CHANNEL_X_IS_SOMEONE_SPEAKING:
+					variableValue = false
+					break
+				case ChannelXVariables.CHANNEL_X_SPEAKING_PULSE:
 					variableValue = false
 					break
 				default:

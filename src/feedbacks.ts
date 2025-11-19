@@ -16,6 +16,7 @@ export enum Feedbacks {
 	GET_BUTTON_CHANNEL_NAME = 'GetButtonChannelName',
 	GET_INPUT_MUTE_BUTTON_STATUS = 'GetInputMuteButtonStatus',
 	GET_OUTPUT_MUTE_BUTTON_STATUS = 'GetOutputMuteButtonStatus',
+	GET_IS_SOMEONE_SPEAKING_INDICATOR = 'GetIsSomeoneSpeakingIndicator',
 }
 
 const channelIndexFeedbackOptions: SomeCompanionFeedbackInputField = {
@@ -141,6 +142,20 @@ export function UpdateFeedbacks(self: ModuleInstance): void {
 				return {
 					text: channelName,
 				}
+			},
+		},
+		[Feedbacks.GET_IS_SOMEONE_SPEAKING_INDICATOR]: {
+			name: Feedbacks.GET_IS_SOMEONE_SPEAKING_INDICATOR,
+			type: 'boolean',
+			defaultStyle: {
+				bgcolor: combineRgb(177, 44, 41),
+			},
+			options: [channelIndexFeedbackOptions],
+			callback: async (feedback) => {
+				let channelIndex = feedback.options.channelIndex || self.getVariableValue(Variables.SELECTED_CHANNEL) || 0
+				if (!channelIndex || isButtonDisabled(channelIndex, self)) return false
+				const variableName = Variables.CHANNEL_X_SPEAKING_PULSE.replace('X', channelIndex.toString())
+				return Boolean(self.getVariableValue(variableName))
 			},
 		},
 	})
