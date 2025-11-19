@@ -309,7 +309,12 @@ export function UpdatePresets(self: ModuleInstance): void {
 		],
 		steps: [
 			{
-				down: [],
+				down: [
+					{
+						actionId: ActionTypes.ToggleOutputMute,
+						options: {},
+					},
+				],
 				up: [],
 				rotate_left: [
 					{
@@ -566,7 +571,14 @@ export function UpdatePresets(self: ModuleInstance): void {
 			],
 			steps: [
 				{
-					down: [],
+					down: [
+						{
+							actionId: ActionTypes.ToggleOutputMute,
+							options: {
+								channelIndex: index,
+							},
+						},
+					],
 					up: [],
 					rotate_left: [
 						{
