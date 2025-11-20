@@ -3,7 +3,7 @@
 	"name": "Open Intercom",
 	"shortname": "Open Intercom",
 	"description": "Eyevinn Open Intercom module for Companion",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"license": "MIT",
 	"repository": "git+https://github.com/Eyevinn/companion-module-eyevinn-intercom.git",
 	"bugs": "https://github.com/Eyevinn/companion-module-eyevinn-intercom/issues",

@@ -198,6 +198,13 @@ export function UpdatePresets(self: ModuleInstance): void {
 				feedbackId: Feedbacks.GET_OUTPUT_MUTE_BUTTON_STATUS,
 				options: {},
 			},
+			{
+				feedbackId: Feedbacks.GET_IS_SOMEONE_SPEAKING_INDICATOR,
+				options: {},
+				style: {
+					bgcolor: combineRgb(177, 44, 41),
+				},
+			},
 		],
 		steps: [
 			{
@@ -419,6 +426,13 @@ export function UpdatePresets(self: ModuleInstance): void {
 				{
 					feedbackId: Feedbacks.GET_OUTPUT_MUTE_BUTTON_STATUS,
 					options: { channelIndex: index },
+				},
+				{
+					feedbackId: Feedbacks.GET_IS_SOMEONE_SPEAKING_INDICATOR,
+					options: { channelIndex: index },
+					style: {
+						bgcolor: combineRgb(177, 44, 41),
+					},
 				},
 			],
 			steps: [

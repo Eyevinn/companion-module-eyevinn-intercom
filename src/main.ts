@@ -14,6 +14,7 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 
 	private wss?: WebSocketServer
 	private clients: Set<WebSocket> = new Set()
+	private speakingPulseTimers = new Map<number, NodeJS.Timeout>()
 
 	constructor(internal: unknown) {
 		super(internal)
@@ -53,9 +54,10 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 				ws.send(
 					JSON.stringify({
 						type: 'error',
-						message: 'Only one browser can be connected to the companion at a time. Please disconnect the other browser session before connecting.',
-						statusCode: 409
-					})
+						message:
+							'Only one browser can be connected to the companion at a time. Please disconnect the other browser session before connecting.',
+						statusCode: 409,
+					}),
 				)
 				ws.close()
 				return
@@ -66,7 +68,7 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 				Feedbacks.GET_INPUT_MUTE_BUTTON_STATUS,
 				Feedbacks.GET_OUTPUT_MUTE_BUTTON_STATUS,
 				Feedbacks.GET_BUTTON_CHANNEL_NAME,
-				Feedbacks.IS_BUTTON_DISABLED
+				Feedbacks.IS_BUTTON_DISABLED,
 			)
 			this.log('info', 'WebSocket client connected')
 
@@ -77,7 +79,7 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 					Feedbacks.GET_INPUT_MUTE_BUTTON_STATUS,
 					Feedbacks.GET_OUTPUT_MUTE_BUTTON_STATUS,
 					Feedbacks.GET_BUTTON_CHANNEL_NAME,
-					Feedbacks.IS_BUTTON_DISABLED
+					Feedbacks.IS_BUTTON_DISABLED,
 				)
 			})
 
@@ -93,6 +95,32 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		this.wss.on('error', (err) => {
 			this.log('error', `WebSocket server error: ${err.message}`)
 		})
+	}
+
+	public startSpeakingPulse(channelIndex: number): void {
+		if (this.speakingPulseTimers.has(channelIndex)) return
+
+		const variableId = Variables.CHANNEL_X_SPEAKING_PULSE.replace('X', channelIndex.toString())
+		let state = false
+		const timer = setInterval(() => {
+			state = !state
+			this.setVariableValues({ [variableId]: state })
+			this.checkFeedbacks(Feedbacks.GET_IS_SOMEONE_SPEAKING_INDICATOR)
+		}, 500)
+
+		this.speakingPulseTimers.set(channelIndex, timer)
+	}
+
+	public stopSpeakingPulse(channelIndex: number): void {
+		const timer = this.speakingPulseTimers.get(channelIndex)
+		if (!timer) return
+
+		clearInterval(timer)
+		this.speakingPulseTimers.delete(channelIndex)
+
+		const variableId = Variables.CHANNEL_X_SPEAKING_PULSE.replace('X', channelIndex.toString())
+		this.setVariableValues({ [variableId]: false })
+		this.checkFeedbacks(Feedbacks.GET_IS_SOMEONE_SPEAKING_INDICATOR)
 	}
 
 	// Send data to all connected clients
