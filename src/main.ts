@@ -106,7 +106,7 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 			state = !state
 			this.setVariableValues({ [variableId]: state })
 			this.checkFeedbacks(Feedbacks.GET_IS_SOMEONE_SPEAKING_INDICATOR)
-		}, 450)
+		}, 500)
 
 		this.speakingPulseTimers.set(channelIndex, timer)
 	}
