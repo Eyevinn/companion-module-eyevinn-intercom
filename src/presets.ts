@@ -24,14 +24,26 @@ export enum GlobalPresetCategories {
 }
 
 export enum ChannelPresetCategories {
-	ChannelOneButtons = 'Call 1 Buttons',
-	ChannelTwoButtons = 'Call 2 Buttons',
-	ChannelThreeButtons = 'Call 3 Buttons',
-	ChannelFourButtons = 'Call 4 Buttons',
-	ChannelFiveButtons = 'Call 5 Buttons',
-	ChannelSixButtons = 'Call 6 Buttons',
-	ChannelSevenButtons = 'Call 7 Buttons',
-	ChannelEightButtons = 'Call 8 Buttons',
+	ChannelOneButtons = 'Call 01 Buttons',
+	ChannelTwoButtons = 'Call 02 Buttons',
+	ChannelThreeButtons = 'Call 03 Buttons',
+	ChannelFourButtons = 'Call 04 Buttons',
+	ChannelFiveButtons = 'Call 05 Buttons',
+	ChannelSixButtons = 'Call 06 Buttons',
+	ChannelSevenButtons = 'Call 07 Buttons',
+	ChannelEightButtons = 'Call 08 Buttons',
+	ChannelNineButtons = 'Call 09 Buttons',
+	ChannelTenButtons = 'Call 10 Buttons',
+	ChannelElevenButtons = 'Call 11 Buttons',
+	ChannelTwelveButtons = 'Call 12 Buttons',
+	ChannelThirteenButtons = 'Call 13 Buttons',
+	ChannelFourteenButtons = 'Call 14 Buttons',
+	ChannelFifteenButtons = 'Call 15 Buttons',
+	ChannelSixteenButtons = 'Call 16 Buttons',
+	ChannelSeventeenButtons = 'Call 17 Buttons',
+	ChannelEighteenButtons = 'Call 18 Buttons',
+	ChannelNineteenButtons = 'Call 19 Buttons',
+	ChannelTwentyButtons = 'Call 20 Buttons',
 }
 
 export enum ChannelXPresetCategory {

@@ -25,7 +25,7 @@ const channelIndexFeedbackOptions: SomeCompanionFeedbackInputField = {
 	label: 'Call Index',
 	default: 0,
 	min: 0,
-	max: 8,
+	max: 20,
 }
 
 const isButtonDisabled = (channelIndex: InputValue, self: ModuleInstance) => {
