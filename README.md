@@ -47,7 +47,7 @@ Once you have added the module, to configure your Elgato Stream Deck simply drag
 - Open Intercom - Opens the intercom website (requires you to configure the URL path in the button)
 - Global Input Mute - Mute/Unmmute all calls
 
-#### Call 1-8 Buttons
+#### Call 1-20 Buttons
 
 These buttons allow you to use the controls for a call at a specific index. The first call in your list of calls will be Call 1. The name of the call line will be displayed on the button once you are connected to Open Intercom.
 
@@ -59,7 +59,7 @@ These buttons allow you to use the controls for a call at a specific index. The 
 
 #### Call X Buttons
 
-Here you can see buttons named Call 1 to 8. Holding down one of these buttons allows you to use the controls for that call with the "X" buttons. The name of the call line will be displayed on the button once you are connected to Open Intercom. \
+Here you can see buttons named Call 1 to 20. Holding down one of these buttons allows you to use the controls for that call with the "X" buttons. The name of the call line will be displayed on the button once you are connected to Open Intercom. \
 E.g. holding down "Call 2" and then pressing "Volume up X" will increase the volume of Call 2.
 
 ## Actions
